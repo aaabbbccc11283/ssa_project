@@ -1,5 +1,7 @@
 {% extends 'chipin/base.html' %}
 {% load static %}
+{% load socialaccount %}
+
 {% block title %}Login - ChipIn{% endblock %}
 
 {% block content %}
@@ -11,4 +13,7 @@
             <input type="submit" value="Login">
         </form>
     </div>
+
+    <h3>Or sign in with:</h3>
+    <a href="{% provider_login_url 'github' %}">Sign in with GitHub</a>
 {% endblock %}

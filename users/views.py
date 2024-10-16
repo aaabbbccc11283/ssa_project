@@ -13,13 +13,16 @@ def register(request):
             form.save()
             messages.success(request, "Your account has been created! You can now log in.")
             return redirect('users:login')
+        else:
+            # The form is invalid, return the form to the template
+            return render(request, 'users/register.html', {'form': form})
     else:
         form = UserRegistrationForm()
     return render(request, 'users/register.html', {'form': form})
 
 @login_required(login_url='users:login')
 def user(request):
-    return render(request, "users/user.html")
+    return render(request, 'users/user.html', {'user': request.user})
 
 def login_view(request):
     if request.method == "POST":

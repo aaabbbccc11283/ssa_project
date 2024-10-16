@@ -73,6 +73,8 @@ button {
     cursor: pointer;
     border-radius: 5px;
     font-size: 14px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 /* General button hover effect */
@@ -84,9 +86,22 @@ button:hover {
 a {
     color: #007BFF;
     text-decoration: none;
-    padding: 5px
+    padding: 5px;
 }
 
 a:hover {
     text-decoration: underline;
+}
+
+.eligible {
+    color: green;
+}
+
+.waiting-room {
+    color: red;
+}
+
+.event-status {
+    font-weight: bold;
+    font-size: 14px;
 }
