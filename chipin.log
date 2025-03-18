@@ -7,3 +7,199 @@ Watching for file changes with StatReloader
 "POST /users/logout/ HTTP/1.1" 302 0
 "GET /users/login/ HTTP/1.1" 200 1182
 "GET /static/chipin/styles.css HTTP/1.1" 404 1865
+Watching for file changes with StatReloader
+"POST /users/login/ HTTP/1.1" 302 0
+"GET /users/ HTTP/1.1" 200 959
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /static/chipin/logo_90.jpg HTTP/1.1" 200 2283
+"GET /chipin/ HTTP/1.1" 200 977
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/create_group/ HTTP/1.1" 200 1272
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /chipin/create_group/ HTTP/1.1" 302 0
+"GET /chipin/group/1/ HTTP/1.1" 200 1143
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /admin/ HTTP/1.1" 200 6671
+"GET /admin/auth/user/ HTTP/1.1" 200 12670
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/auth/user/1/change/ HTTP/1.1" 200 22418
+"GET /static/admin/css/forms.css HTTP/1.1" 304 0
+"GET /static/admin/js/SelectBox.js HTTP/1.1" 304 0
+"GET /static/admin/js/SelectFilter2.js HTTP/1.1" 304 0
+"GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+"GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /static/admin/js/calendar.js HTTP/1.1" 200 9141
+"GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 19319
+"GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+"GET /static/admin/img/selector-icons.svg HTTP/1.1" 304 0
+"GET /static/admin/img/icon-unknown-alt.svg HTTP/1.1" 304 0
+"GET /static/admin/img/icon-unknown.svg HTTP/1.1" 304 0
+"GET /static/admin/img/icon-clock.svg HTTP/1.1" 200 677
+"GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1086
+"POST /admin/auth/user/1/change/ HTTP/1.1" 302 0
+"GET /admin/auth/user/ HTTP/1.1" 200 12870
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/users/profile/ HTTP/1.1" 200 10983
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/auth/user/ HTTP/1.1" 200 12673
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/auth/user/1/change/ HTTP/1.1" 200 22441
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/auth/group/ HTTP/1.1" 200 8130
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/auth/user/ HTTP/1.1" 200 12673
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /chipin/group/1/ HTTP/1.1" 200 991
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/logout/ HTTP/1.1" 302 0
+"GET /users/login/ HTTP/1.1" 200 1182
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/login/ HTTP/1.1" 302 0
+"GET /users/ HTTP/1.1" 200 964
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/ HTTP/1.1" 200 1139
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/ HTTP/1.1" 200 991
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/invite/ HTTP/1.1" 200 1423
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /chipin/group/1/invite/ HTTP/1.1" 302 0
+"GET /chipin/group/1/ HTTP/1.1" 200 1125
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/logout/ HTTP/1.1" 302 0
+"GET /users/login/ HTTP/1.1" 200 1182
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/login/ HTTP/1.1" 302 0
+"GET /users/ HTTP/1.1" 200 972
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/ HTTP/1.1" 200 1297
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/accept-invite/1/?user_id=2 HTTP/1.1" 302 0
+"GET /chipin/group/1/ HTTP/1.1" 200 1205
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/logout/ HTTP/1.1" 302 0
+"GET /users/login/ HTTP/1.1" 200 1182
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /users/login/ HTTP/1.1" 200 1053
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+- Broken pipe from ('127.0.0.1', 51385)
+"POST /users/login/ HTTP/1.1" 302 0
+"GET /users/ HTTP/1.1" 200 964
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /admin/auth/user/2/change/ HTTP/1.1" 200 22393
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/users/profile/ HTTP/1.1" 200 10983
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/users/profile/2/change/ HTTP/1.1" 200 11793
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/users/profile/ HTTP/1.1" 200 10983
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/auth/user/ HTTP/1.1" 200 12673
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/auth/group/ HTTP/1.1" 200 8130
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/auth/user/ HTTP/1.1" 200 12673
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/users/profile/ HTTP/1.1" 200 10983
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/users/profile/2/change/ HTTP/1.1" 200 11793
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/users/profile/2/delete/ HTTP/1.1" 200 7734
+"GET /static/admin/js/cancel.js HTTP/1.1" 200 884
+"POST /admin/users/profile/2/delete/ HTTP/1.1" 302 0
+"GET /admin/users/profile/ HTTP/1.1" 200 10727
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/users/profile/add/ HTTP/1.1" 200 11593
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"POST /admin/users/profile/add/ HTTP/1.1" 302 0
+"GET /admin/users/profile/ HTTP/1.1" 200 11208
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /users/ HTTP/1.1" 200 967
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/ HTTP/1.1" 200 1142
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/ HTTP/1.1" 200 1036
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+C:\Users\daddy\ssa_project\chipin\models.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"POST /users/logout/ HTTP/1.1" 302 0
+"GET /users/login/ HTTP/1.1" 200 1182
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/login/ HTTP/1.1" 302 0
+"GET /users/ HTTP/1.1" 200 967
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/ HTTP/1.1" 200 1596
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/logout/ HTTP/1.1" 302 0
+"GET /users/login/ HTTP/1.1" 200 1182
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/login/ HTTP/1.1" 200 1176
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /users/register/ HTTP/1.1" 200 2762
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/register/ HTTP/1.1" 302 0
+"GET /users/login/ HTTP/1.1" 200 1208
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/login/ HTTP/1.1" 302 0
+"GET /users/ HTTP/1.1" 200 971
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/ HTTP/1.1" 200 1489
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/ HTTP/1.1" 200 1305
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/request-to-join/ HTTP/1.1" 302 0
+"GET /chipin/group/1/ HTTP/1.1" 200 1460
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/ HTTP/1.1" 200 1305
+"GET /chipin/group/1/request-to-join/ HTTP/1.1" 302 0
+"GET /chipin/group/1/ HTTP/1.1" 200 1453
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/logout/ HTTP/1.1" 302 0
+"GET /users/login/ HTTP/1.1" 200 1182
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/login/ HTTP/1.1" 302 0
+"GET /users/ HTTP/1.1" 200 967
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/ HTTP/1.1" 200 1596
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/ HTTP/1.1" 200 1597
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/request/1/vote/approve/ HTTP/1.1" 302 0
+"GET /chipin/group/1/ HTTP/1.1" 200 1597
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/request/1/vote/approve/ HTTP/1.1" 302 0
+"GET /chipin/group/1/ HTTP/1.1" 200 1722
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/logout/ HTTP/1.1" 302 0
+"GET /users/login/ HTTP/1.1" 200 1182
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/login/ HTTP/1.1" 302 0
+"GET /users/ HTTP/1.1" 200 972
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/ HTTP/1.1" 200 1599
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/ HTTP/1.1" 200 1539
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/request/1/vote/approve/ HTTP/1.1" 302 0
+"GET /chipin/group/1/ HTTP/1.1" 200 1557
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
