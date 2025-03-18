@@ -9,9 +9,13 @@ from django.contrib.auth.models import User
 from .forms import GroupCreationForm
 from .models import Group
 import urllib.parse
+import logging
+from django.contrib.auth import authenticate, login, logout
 
 def home(request):
     return render(request, "chipin/home.html")
+
+logger = logging.getLogger(__name__)
 
 @login_required
 def create_group(request):
@@ -19,6 +23,7 @@ def create_group(request):
         form = GroupCreationForm(request.POST, user=request.user)
         if form.is_valid():
             group = form.save()
+            logger.info(f"User '{request.user.username}' created group '{group.name}'.")  # Log group creation
             messages.success(request, f'Group "{group.name}" created successfully!')
             return redirect('chipin:group_detail', group_id=group.id)
     else:

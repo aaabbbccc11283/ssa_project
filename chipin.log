@@ -1,0 +1,9 @@
+Watching for file changes with StatReloader
+"POST /users/login/ HTTP/1.1" 302 0
+"GET /users/ HTTP/1.1" 200 968
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/ HTTP/1.1" 200 985
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/logout/ HTTP/1.1" 302 0
+"GET /users/login/ HTTP/1.1" 200 1182
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
