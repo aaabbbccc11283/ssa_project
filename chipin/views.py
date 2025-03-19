@@ -20,6 +20,8 @@ from .forms import FileUploadForm
 from django.http import HttpResponseForbidden
 from .models import Event
 
+logger = logging.getLogger(__name__)
+
 @login_required
 def delete_event(request, group_id, event_id):
     group = get_object_or_404(Group, id=group_id)
@@ -270,7 +272,6 @@ def home(request):
         'available_groups': available_groups  
     })
 
-logger = logging.getLogger(__name__)
 
 @login_required
 def create_group(request):
@@ -290,6 +291,7 @@ def group_detail(request, group_id, edit_comment_id=None):
     group = get_object_or_404(Group, id=group_id)
     comments = group.comments.all().order_by('-created_at')  # Fetch all comments for the group
     events = group.events.all()  # Fetch all events associated with the group
+    is_member = request.user in group.members.all() #is member part of group
     # Add a new comment or edit an existing comment
     if edit_comment_id: # Fetch the comment to edit, if edit_comment_id is provided
         comment_to_edit = get_object_or_404(Comment, id=edit_comment_id)
@@ -298,7 +300,9 @@ def group_detail(request, group_id, edit_comment_id=None):
     else:
         comment_to_edit = None
     if request.method == 'POST':
-        if comment_to_edit: # Editing an existing comment
+        if not is_member:
+            return redirect('chipin:group_detail', group_id=group.id)  # Prevent non-members from commenting
+        elif comment_to_edit: # Editing an existing comment
             form = CommentForm(request.POST, instance=comment_to_edit)
         else: # Adding a new comment
             form = CommentForm(request.POST)
@@ -330,6 +334,7 @@ def group_detail(request, group_id, edit_comment_id=None):
         'comment_to_edit': comment_to_edit,
         'events': events,
         'event_share_info': event_share_info,
+        'is_member': is_member,
     })
 
 @login_required
