@@ -165,3 +165,9 @@ LOGGING = {
         },
     },
 }
+
+# settings.py
+SESSION_COOKIE_SECURE = True  # Ensures session cookies are only sent over HTTPS
+SESSION_COOKIE_HTTPONLY = True  # Prevents JavaScript access to session cookies
+SESSION_COOKIE_SAMESITE = 'Lax'  # Protects against Cross-Site Request Forgery (CSRF) attacks
+SESSION_COOKIE_AGE = 1800  # 30-minute session expiration
