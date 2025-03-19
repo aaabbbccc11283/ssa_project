@@ -249,3 +249,123 @@ Watching for file changes with StatReloader
 "POST /users/logout/ HTTP/1.1" 302 0
 "GET /users/login/ HTTP/1.1" 200 1182
 "GET /static/chipin/styles.css HTTP/1.1" 404 1865
+Watching for file changes with StatReloader
+"POST /users/login/ HTTP/1.1" 302 0
+"GET /users/ HTTP/1.1" 200 967
+"GET /static/chipin/logo_90.jpg HTTP/1.1" 304 0
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/ HTTP/1.1" 200 1596
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/ HTTP/1.1" 200 1596
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/ HTTP/1.1" 200 2600
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/comment/3/delete/ HTTP/1.1" 302 0
+"GET /chipin/group/1/ HTTP/1.1" 200 2179
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/ HTTP/1.1" 200 2179
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+C:\Users\daddy\ssa_project\users\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\ssa_project\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\ssa_project\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\users\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\forms.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\forms.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\users\models.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\models.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\models.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\models.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\daddy\ssa_project\chipin\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET /chipin/group/1/ HTTP/1.1" 302 0
+Not Found: /accounts/login/
+"GET /accounts/login/?next=/chipin/group/1/ HTTP/1.1" 404 2546
+"GET /chipin/ HTTP/1.1" 302 0
+Not Found: /accounts/login/
+"GET /accounts/login/?next=/chipin/ HTTP/1.1" 404 2538
+"GET /users/ HTTP/1.1" 302 0
+"GET /users/login/?next=/users/ HTTP/1.1" 200 1053
+"POST /users/login/ HTTP/1.1" 302 0
+"GET /users/ HTTP/1.1" 200 967
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/ HTTP/1.1" 200 1596
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/ HTTP/1.1" 200 2414
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/create_event/ HTTP/1.1" 200 1472
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /chipin/group/1/create_event/ HTTP/1.1" 302 0
+"GET /chipin/group/1/ HTTP/1.1" 200 3694
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/event/1/join/ HTTP/1.1" 302 0
+"GET /chipin/group/1/ HTTP/1.1" 200 3645
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/logout/ HTTP/1.1" 302 0
+"GET /users/login/ HTTP/1.1" 200 1182
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/login/ HTTP/1.1" 302 0
+"GET /users/ HTTP/1.1" 200 971
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/ HTTP/1.1" 200 1800
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/ HTTP/1.1" 200 3169
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/event/1/join/ HTTP/1.1" 302 0
+"GET /chipin/group/1/ HTTP/1.1" 200 3296
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/event/1/leave/ HTTP/1.1" 302 0
+"GET /chipin/group/1/ HTTP/1.1" 200 3354
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/event/1/join/ HTTP/1.1" 302 0
+"GET /chipin/group/1/ HTTP/1.1" 200 3296
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/logout/ HTTP/1.1" 302 0
+"GET /users/login/ HTTP/1.1" 200 1182
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"POST /users/login/ HTTP/1.1" 302 0
+"GET /users/ HTTP/1.1" 200 967
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/ HTTP/1.1" 200 1596
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/ HTTP/1.1" 200 3458
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
+"GET /chipin/group/1/event/1/delete/ HTTP/1.1" 302 0
+"GET /chipin/group/1/ HTTP/1.1" 200 2589
+"GET /static/chipin/styles.css HTTP/1.1" 404 1865
