@@ -33,7 +33,7 @@ class Event(models.Model):
     total_spend = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=20, default='Pending')  # Can be 'Pending' or 'Active'
     group = models.ForeignKey(Group, related_name='events', on_delete=models.CASCADE)
-    members = models.ManyToManyField(User, related_name='event_memberships', blank=True)  
+    members = models.ManyToManyField(User, related_name='event_memberships', blank=True) 
 
     def calculate_share(self):
         members_count = self.group.members.count()
@@ -50,3 +50,11 @@ class Event(models.Model):
                 return False
         self.status = 'Active'
         return True
+
+class Transaction(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username

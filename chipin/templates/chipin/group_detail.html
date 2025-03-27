@@ -94,6 +94,9 @@
                 {% if request.user == group.admin %}
                     <a href="{% url 'chipin:delete_event' group.id event.id %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this event?');">Delete Event</a>
                 {% endif %}
+                
+                <a href="{% url 'chipin:transfer_funds' event.id %} "class="btn btn-danger" > Transfer Funds </a>
+
             </li>
         {% endfor %}
     </ul>

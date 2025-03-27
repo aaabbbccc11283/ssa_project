@@ -3,13 +3,26 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from .forms import UserRegistrationForm
+from django.contrib import messages 
+from .forms import UserRegistrationForm, TopUpForm
 from django.contrib.auth.forms import UserCreationForm
 import logging
+from .models import Transaction
+from django import forms
 
 # Set up logger
 logger = logging.getLogger(__name__)
+
+def user(request):
+    profile = request.user.profile
+    return render(request, 'users/user.html', {
+        'user': request.user,
+        'balance': profile.balance
+    })
+
+def user_view(request):
+    profile = request.user.profile  # Get the logged-in user's profile
+    return render(request, 'users/user.html', {'balance': profile.balance})
 
 def login_view(request):
     if request.method == 'POST':
@@ -74,3 +87,4 @@ def logout_view(request):
     logout(request)
     messages.success(request, "Successfully logged out.")
     return redirect('users:login')
+

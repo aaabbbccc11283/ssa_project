@@ -4,6 +4,7 @@ from .models import Comment
 from django import forms
 from django.core.exceptions import ValidationError
 import mimetypes
+from users.models import User
 
 class FileUploadForm(forms.Form):
     file = forms.FileField()
@@ -64,3 +65,11 @@ class GroupCreationForm(forms.ModelForm):
             group.save()
             group.members.add(self.user)  # Add the admin to the members list
         return group
+
+class TopUpForm(forms.ModelForm):
+    amount = forms.DecimalField(
+        min_value=0.01, decimal_places=2, max_digits=5, label="Amount to Top-Up"
+    )
+class Meta:
+        model = User
+        fields = ['amount']

@@ -19,8 +19,74 @@ from django.core.files.storage import FileSystemStorage
 from .forms import FileUploadForm
 from django.http import HttpResponseForbidden
 from .models import Event
+from django.db import transaction
+from decimal import Decimal
+from users.models import Profile
+from django import forms
+from .forms import TopUpForm
+from .models import Transaction
+
+
 
 logger = logging.getLogger(__name__)
+
+@login_required
+@transaction.atomic
+def transfer_funds(request, event_id):
+    event = get_object_or_404(id=event_id)
+    group_members = event.group.members.all()
+    share = event.calulate_share()
+    admin_user = event.group.admin
+    total_collected = Decimal(0)
+    
+    for member in group_members:
+        try :
+            profile = member.profile
+            old_balance = profile.balance
+            profile.balance -= Decimal(share)
+            profile.save()
+            total_collected += Decimal(share)
+            print(f"{member.username}: balance updated from {old_balance} to {profile.balance}")
+        except profile.doesnotexist:
+            pass
+    
+    try:
+        admin_profile = admin_user.profile
+        old_admin_balance = admin_profile.balance
+        admin_profile.balance += total_collected
+        admin_profile.save()
+        print(f"Admin balance updated from {old_admin_balance} to {admin_profile.balance}")
+    except Profile.DoesNotExist:
+        print(f'No projile found for admin {admin_user.username}')
+    
+    event.status = "Archived"
+    event.save()
+    
+    return redirect('chipin:group_detail')
+
+def top_up(request):
+    profile = request.user.profile
+
+    if request.method == 'POST':
+        form = TopUpForm(request.POST,)
+        if form.is_valid():
+            amount = form.cleaned_data['amount']
+            profile.balance += amount
+            profile.save()
+            Transaction.objects.create(user=request.user, amount=amount)
+            messages.success(request, f'Your balance has been updated by ${amount}')
+            return redirect('users:user')
+        else:
+            return render(request, 'users/top_up.html', {'form': form})
+
+    else:
+        form = TopUpForm()
+    context = {
+        'form': form,
+        'user_balance': request.user.profile.balance,
+        'welcome_message': f"Welcome back, {request.user.profile.nickname}!",
+}
+    return render(request, 'users/top_up.html', context)
 
 @login_required
 def delete_event(request, group_id, event_id):
