@@ -6,3 +6,4 @@ urlpatterns = [
     path('users/', include(("users.urls", "users"), namespace="users")),
     path('chipin/', include(("chipin.urls", "chipin"), namespace="chipin")),
     path('accounts/', include('allauth.urls')),  
+]
