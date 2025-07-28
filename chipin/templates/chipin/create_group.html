@@ -4,6 +4,7 @@
 
 {% block content %}
     <h1>Create a New Transfer Portal</h1>
+    <p>Please fill this feild with the 2 parties of the transfer</p>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
