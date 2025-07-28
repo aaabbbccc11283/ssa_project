@@ -4,10 +4,10 @@
     <h1>{{ group.name }}</h1>
     <p>Administrator: {{ group.admin.profile.first_name}}</p>
 
-    <h2>Group Events</h2>
+    <h2>Transactions</h2>
     <!-- Only display "Create New Event" link to the group administrator -->
     {% if request.user == group.admin %}
-        <a href="{% url 'chipin:create_event' group.id %}" class="btn btn-primary">Create New Event</a>
+        <a href="{% url 'chipin:create_event' group.id %}" class="btn btn-primary">Create New Transaction</a>
     {% endif %}
     <ul>
         {% for event, info in event_share_info.items %}
