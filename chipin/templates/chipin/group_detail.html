@@ -2,8 +2,8 @@
 {% block title %}{{ group.name }}{% endblock %}
 {% block content %}
     <h1>{{ group.name }}</h1>
-    <p>Administrator: {{ group.admin.profile.nickname }}</p>
-      
+    <p>Administrator: {{ group.admin.profile.first_name}}</p>
+
     <h2>Group Events</h2>
     <!-- Only display "Create New Event" link to the group administrator -->
     {% if request.user == group.admin %}
