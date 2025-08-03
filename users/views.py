@@ -29,6 +29,7 @@ def register(request):
 
 @login_required(login_url='users:login')
 def user(request):
+    user = User.objects.get(pk=request.user.id)  # Force fresh fetch
     profile = request.user.profile
     transactions = Transaction.objects.filter(user=request.user)  # Fetch user's transactions
     return render(request, 'users/user.html', {
@@ -36,7 +37,6 @@ def user(request):
         'balance': profile.balance,
         'transactions': transactions  # Pass transactions to the template
     })
-
 
 def login_view(request):
     if request.method == "POST":

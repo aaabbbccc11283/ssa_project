@@ -1,6 +1,12 @@
 from django import forms
 from .models import Group
 from .models import Comment
+from chipin.models import Event
+
+class AcceptEventForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = []  # No input fields; action only
 
 class GroupCreationForm(forms.ModelForm):
     class Meta:

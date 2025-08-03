@@ -17,6 +17,34 @@ from .models import Event
 from users.models import Transaction
 
 @login_required
+def accept_event(request, event_id):
+    event = Event.objects.get(id=event_id)
+
+    if request.method == 'POST':
+        event.accepted_by = request.user
+        event.save()
+
+        # Apply transaction logic
+        amount = event.total_spend
+        profile = request.user.profile
+        profile.balance += amount
+        profile.save()
+
+        Transaction.objects.create(
+            user=request.user,
+            amount=amount,
+            group=event.group.name,
+            event=event.name
+        )
+
+        messages.success(request, f"You accepted '{event.name}' and received ${amount}!")
+        return redirect('users:user')
+
+    return render(request, 'chipin/accept_event.html', {
+        'event': event,
+    })
+
+@login_required
 def home(request):
     user = request.user
     pending_invitations = user.pending_invitations.all() # Get pending group invitations for the current user
@@ -262,21 +290,38 @@ def create_event(request, group_id):
 def join_event(request, group_id, event_id):
     group = get_object_or_404(Group, id=group_id)
     event = get_object_or_404(Event, id=event_id, group=group)
-    event_share = event.calculate_share()  
-    # Check if the user is eligible to join based on their max spend
-    if request.user.profile.max_spend < event_share:
-        messages.error(request, f"Your max spend of ${request.user.profile.max_spend} is too low to join this event.")
-        return redirect('chipin:group_detail', group_id=group.id)
-    # Check if the user has already joined the event
-    if request.user in event.members.all():
+
+    user = request.user
+    profile = user.profile
+
+    if user in event.members.all():
         messages.info(request, "You have already joined this event.")
         return redirect('chipin:group_detail', group_id=group.id)
-    # Add the user to the event
-    event.members.add(request.user)   
-    messages.success(request, f"You have successfully joined the event '{event.name}'.")  
-    # Optionally, update the event status if needed
-    event.check_status()
+
+    # Determine new number of participants including this user
+    current_members = event.members.count()
+    new_participant_count = current_members + 1
+    share = event.total_spend / new_participant_count
+
+    if profile.balance < share:
+        messages.error(request, f"You do not have enough balance to join this event. Required: ${share:.2f}")
+        return redirect('chipin:group_detail', group_id=group.id)
+
+    # Deduct share and join event
+    profile.balance -= share
+    profile.save()
+    event.members.add(user)
     event.save()
+
+    # Create transaction
+    Transaction.objects.create(
+        user=user,
+        amount=-share,
+        group=group.name,
+        event=event.name
+    )
+
+    messages.success(request, f"You joined '{event.name}' and paid your share of ${share:.2f}.")
     return redirect('chipin:group_detail', group_id=group.id)
 
 

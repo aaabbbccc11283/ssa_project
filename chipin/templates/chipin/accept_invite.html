@@ -1,0 +1,10 @@
+{% extends 'chipin/base.html' %}
+{% block content %}
+
+<h2>Accept Event</h2>
+<p>Do you want to accept <strong>{{ event.name }}</strong> and receive <strong>${{ event.total_spend }}</strong>?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Accept</button>
+</form>

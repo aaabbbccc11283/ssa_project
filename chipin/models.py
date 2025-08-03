@@ -33,13 +33,16 @@ class Event(models.Model):
     total_spend = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=20, default='Pending')  # Can be 'Pending' or 'Active'
     group = models.ForeignKey(Group, related_name='events', on_delete=models.CASCADE)
-    members = models.ManyToManyField(User, related_name='event_memberships', blank=True)  
+    members = models.ManyToManyField(User, related_name='event_memberships', blank=True)
+    accepted_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='accepted_events')
+
+    def __str__(self):
+        return f"{self.name} - {self.group.name}"
 
     def calculate_share(self):
-        members_count = self.group.members.count()
-        if members_count == 0:
-            return 0
-        return self.total_spend / members_count
+        if self.accepted_by:
+            return self.total_spend
+        return 0
 
     def check_status(self):
         """ Check if all members' max spend can cover the event. """
