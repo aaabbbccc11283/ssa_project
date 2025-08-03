@@ -218,7 +218,7 @@ def group_detail(request, group_id, edit_comment_id=None):
         username = request.POST.get("username")
         return redirect('chipin:home')
     comments = group.comments.all().order_by('-created_at')  # Fetch all comments for the group
-    events = group.events.all()  # Fetch all events associated with the group
+    events = group.events.filter(archived=False)   # Fetch all events associated with the group and filter out archived events
     is_member = request.user in group.members.all()
     # Add a new comment or edit an existing comment
     if edit_comment_id: # Fetch the comment to edit, if edit_comment_id is provided
@@ -434,3 +434,36 @@ def transfer_funds(request, group_id, event_id):
     messages.success(request, "Funds transferred successfully!")
     
     return redirect('chipin:group_detail', group_id=group.id)
+
+@login_required
+def archive_event(request, group_id, event_id):
+    group = get_object_or_404(Group, id=group_id)
+    event = get_object_or_404(Event, id=event_id, group=group)
+
+    if request.user != group.admin:
+        messages.error(request, "Only the group administrator can archive events.")
+        return redirect('chipin:group_detail', group_id=group.id)
+
+    if event.archived:
+        messages.info(request, f"The event '{event.name}' is already archived.")
+    else:
+        event.archived = True
+        event.status = "Archived"  # Optional if you're also using this
+        event.save()
+        messages.success(request, f"The event '{event.name}' has been archived.")
+
+    return redirect('chipin:group_detail', group_id=group.id)
+
+
+def archived_events(request, group_id):
+    group = get_object_or_404(Group, id=group_id)
+
+    if request.user not in group.members.all():
+        messages.error(request, "You cannot view a group you are not in.")
+        return redirect('chipin:home')
+
+    archived_events = group.events.filter(archived=True)
+    return render(request, 'chipin/archived_events.html', {
+        'group': group,
+        'archived_events': archived_events
+    })

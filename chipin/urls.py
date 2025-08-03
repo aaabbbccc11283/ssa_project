@@ -26,5 +26,8 @@ urlpatterns = [
    path('group/<int:group_id>/event/<int:event_id>/delete/', views.delete_event, name='delete_event'),
    path('group/<int:group_id>/event/<int:event_id>/transfer_funds/', views.transfer_funds, name='transfer_funds'),
    path('accept_event/<int:event_id>/', views.accept_event, name='accept_event'),
+   path('group/<int:group_id>/event/<int:event_id>/archive/', views.archive_event, name='archive_event'),
+   path('archived/', views.archived_events, name='archived_events'),
+   path('group/<int:group_id>/archived/', views.archived_events, name='archived_events'),
    path("", user_views.user, name="user")
 ]

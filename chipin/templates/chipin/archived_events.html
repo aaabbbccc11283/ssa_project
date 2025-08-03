@@ -1,0 +1,20 @@
+{% extends 'chipin/base.html' %}
+{% block title %}Archived Events - {{ group.name }}{% endblock %}
+
+{% block content %}
+<h1>Archived Events - {{ group.name }}</h1>
+
+<a href="{% url 'chipin:group_detail' group.id %}" class="btn btn-primary">← Back to Group</a>
+
+<ul>
+    {% for event in archived_events %}
+        <li>
+            <strong>{{ event.name }}</strong> - Date: {{ event.date }}<br>
+            Total Spend: ${{ event.total_spend }}<br>
+            Status: {{ event.status }}
+        </li>
+    {% empty %}
+        <li>No archived events yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -35,6 +35,7 @@ class Event(models.Model):
     group = models.ForeignKey(Group, related_name='events', on_delete=models.CASCADE)
     members = models.ManyToManyField(User, related_name='event_memberships', blank=True)
     accepted_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='accepted_events')
+    archived = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name} - {self.group.name}"
