@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError  # ✅ ADDED: for custom validation
+from django.core.exceptions import ValidationError
 from .models import Profile
 
 class UserRegistrationForm(UserCreationForm):
@@ -14,7 +14,6 @@ class UserRegistrationForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2', 'first_name', 'surname', 'nickname']
 
-    # ✅ ADDED: custom validation to enforce unique nickname
     def clean_nickname(self):
         nickname = self.cleaned_data.get('nickname')
         if Profile.objects.filter(nickname=nickname).exists():
@@ -34,3 +33,15 @@ class UserRegistrationForm(UserCreationForm):
             profile.nickname = self.cleaned_data['nickname']
             profile.save()
         return user
+
+class TopUpForm(forms.ModelForm):
+    top_up_amount = forms.DecimalField(
+        min_value=0.01,
+        decimal_places=2,
+        max_digits=5,
+        label="Amount to Top Up"
+    )
+
+    class Meta:
+        model = Profile
+        fields = ['top_up_amount']
