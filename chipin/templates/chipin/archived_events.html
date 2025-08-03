@@ -8,11 +8,26 @@
 
 <ul>
     {% for event in archived_events %}
-        <li>
-            <strong>{{ event.name }}</strong> - Date: {{ event.date }}<br>
-            Total Spend: ${{ event.total_spend }}<br>
-            Status: {{ event.status }}
-        </li>
+<li>
+    <strong>{{ event.name }}</strong><br>
+    Date: {{ event.date }}<br>
+    Total Spend: ${{ event.total_spend }}<br>
+    Status: {{ event.status }}<br>
+
+    {% if event.members.all %}
+        <strong>Paid by:</strong>
+        <ul>
+            {% for member in event.members.all %}
+                <li>{{ member.profile.nickname }} ({{ member.username }})</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <strong>No members joined this event.</strong><br>
+    {% endif %}
+
+    <strong>Paid to:</strong> {{ event.group.admin.profile.nickname }} (Admin)<br>
+</li>
+
     {% empty %}
         <li>No archived events yet.</li>
     {% endfor %}

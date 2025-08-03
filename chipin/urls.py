@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from users import views as user_views
+from . import views
 
 urlpatterns = [
    path("", views.home, name="home"),
@@ -29,5 +30,6 @@ urlpatterns = [
    path('group/<int:group_id>/event/<int:event_id>/archive/', views.archive_event, name='archive_event'),
    path('archived/', views.archived_events, name='archived_events'),
    path('group/<int:group_id>/archived/', views.archived_events, name='archived_events'),
-   path("", user_views.user, name="user")
+   path("", user_views.user, name="user"),
+   path('transactions/', views.transaction_history, name='transaction_history'),
 ]

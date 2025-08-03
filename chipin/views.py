@@ -15,6 +15,7 @@ from django.db import transaction
 from decimal import Decimal
 from .models import Event
 from users.models import Transaction
+from django.shortcuts import render
 
 @login_required
 def accept_event(request, event_id):
@@ -467,3 +468,9 @@ def archived_events(request, group_id):
         'group': group,
         'archived_events': archived_events
     })
+
+@login_required
+def transaction_history(request):
+    from users.models import Transaction
+    transactions = Transaction.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'chipin/transaction_history.html', {'transactions': transactions})

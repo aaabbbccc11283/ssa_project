@@ -11,36 +11,7 @@
     <a href="{% url 'chipin:home' %}">Click through to ChipIn Functions</a>
     <a href="{% url 'users:delete' %}">Delete Account</a>
 
-        <h2>Transactions</h2>
-    <div style="max-height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; width: fit-content;">
-        <table style="border-collapse: collapse; width: auto;">
-            <thead>
-                <tr>
-                    <th style="text-align: left; padding: 8px 16px; border-bottom: 2px solid #ddd;">Date</th>
-                    <th style="text-align: left; padding: 8px 16px; border-bottom: 2px solid #ddd;">Amount</th>
-                    <th style="text-align: left; padding: 8px 16px; border-bottom: 2px solid #ddd;">Group</th>
-                    <th style="text-align: left; padding: 8px 16px; border-bottom: 2px solid #ddd;">Event</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if transactions %}
-                    {% for transaction in transactions %}
-                        <tr>
-                            <td style="padding: 8px 16px;">{{ transaction.created_at|date:"d-m-Y H:i" }}</td>
-                            <td style="padding: 8px 16px; color: {% if transaction.amount > 0 %}green{% else %}red{% endif %};">
-                                ${{ transaction.amount|floatformat:2 }}
-                            </td>
-                            <td style="padding: 8px 16px;">{{ transaction.group }}</td>
-                            <td style="padding: 8px 16px;">{{ transaction.event }}</td>
-                        </tr>
-                    {% endfor %}
-                {% else %}
-                    <tr>
-                        <td colspan="2" style="text-align: center; padding: 8px;">No transactions to display.</td>
-                    </tr>
-                {% endif %}
-            </tbody>            
-        </table>
+<a href="{% url 'chipin:transaction_history' %}">View Full Transaction History</a>
     </div>
 
 {% endblock %}
