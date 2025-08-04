@@ -1,107 +1,212 @@
-/* Basic styling for the header section */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f4f4f4;
-    padding: 10px 20px;
-    border-bottom: 1px solid #ddd;
+/* === SafeSwap Dashboard Redesign: Destiny-Inspired Theme === */
+:root {
+    --purple: #8E24AA;         /* Destiny 1 Legendary Purple */
+    --green: #10B981;          /* Spring Green */
+    --background: #2C2C38;     /* Warm Graphite Grey */
+    --card-bg: #3A3A4B;        /* Soft Charcoal */
+    --text: #F3F4F6;           /* Off-White */
+    --accent: #A78BFA;         /* Dim Lavender */
 }
 
-/* Style for the logo in the header */
-.logo img {
-    max-height: 50px;
+/* General Body Override */
+body {
+    background-color: var(--background);
+    color: var(--text);
 }
 
-/* User info section within the header */
-.user-info {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
+/* Container */
+.dashboard-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: var(--background);
+    border-radius: 12px;
 }
 
-/* User information span */
-.user-info span {
-    margin-right: 10px;
+/* Headings and Text */
+.welcome-text {
+    font-size: 28px;
+    color: var(--green);
+    margin-bottom: 10px;
+}
+
+.subtext {
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 25px;
+}
+
+/* Balance Card */
+.balance-card {
+    background-color: var(--card-bg);
+    padding: 24px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+}
+
+.balance-card h3 {
+    margin: 0 0 8px;
+    color: var(--text);
+}
+
+.balance-amount {
+    font-size: 26px;
     font-weight: bold;
+    color: var(--green);
 }
 
-/* Logout button styling */
-.user-info button {
-    background-color: #007BFF;
+/* Buttons */
+.button-group {
+    margin-top: 18px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 18px;
+    text-decoration: none;
     color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 14px;
+    background-color: var(--green);
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
 }
 
-/* Logout button hover effect */
-.user-info button:hover {
-    background-color: #0056b3;
+.btn:hover {
+    background-color: #0e9e74;
 }
 
-/* Style for the messages */
-.messages {
-    list-style-type: none;
-    padding: 0;
-    margin: 10px 0;
-    color: red; /* Change this color based on your message type */
+.primary-btn {
+    background-color: var(--green);
 }
 
-/* Individual message items */
-.messages li {
-    margin-bottom: 5px;
+.secondary-btn {
+    background-color: var(--purple);
 }
 
-/* Styling for message tags, like error or success */
-.messages li.error {
-    color: red;
+.danger-btn {
+    background-color: #ef4444;
 }
 
-.messages li.success {
-    color: green;
+.danger-btn:hover {
+    background-color: #dc2626;
 }
 
-/* Basic button styling (for general use) */
-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 14px;
+.transaction-history {
+    text-align: center;
     margin-top: 20px;
+}
+
+
+
+/* === SafeSwap: Top Up Page Styles === */
+.top-up-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.topup-header {
+    color: var(--green);
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.topup-subtext {
+    color: var(--accent);
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+.topup-balance {
+    font-weight: bold;
+    color: var(--green);
+}
+
+/* Form Styling Override (uses existing form input styling) */
+.topup-form input[type="text"],
+.topup-form input[type="number"],
+.topup-form input[type="email"],
+.topup-form select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4b4b5f;
+    color: var(--text);
+}
+
+.topup-form input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--green);
+}
+
+
+/* === SafeSwap: Transaction History Styles === */
+.transaction-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.transaction-header {
+    color: var(--green);
     margin-bottom: 20px;
 }
 
-/* General button hover effect */
-button:hover {
-    background-color: #218838;
+/* Scrollable wrapper if too long */
+.transaction-table-wrapper {
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid #4b5563;
+    border-radius: 8px;
 }
 
-/* Basic styling for links */
-a {
-    color: #007BFF;
-    text-decoration: none;
-    padding: 5px;
+/* Styled Table */
+.transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
 }
 
-a:hover {
-    text-decoration: underline;
+.transaction-table thead {
+    background-color: var(--purple);
+    color: white;
+    position: sticky;
+    top: 0;
 }
 
-.eligible {
-    color: green;
+.transaction-table th,
+.transaction-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #555;
+    color: var(--text);
 }
 
-.waiting-room {
-    color: red;
+.transaction-table tbody tr:nth-child(even) {
+    background-color: #4b4b5f;
 }
 
-.event-status {
-    font-weight: bold;
+.transaction-table tbody tr:nth-child(odd) {
+    background-color: #3f3f51;
+}
+
+.transaction-table td {
     font-size: 14px;
 }
+
+.back-link {
+    margin-top: 25px;
+    text-align: center;
+}
+
