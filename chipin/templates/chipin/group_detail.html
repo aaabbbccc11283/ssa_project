@@ -21,16 +21,17 @@
                     <strong>{{ event.name }}</strong><br>
                     Date: {{ event.date }}<br>
                     <strong>Total Spend:</strong> ${{ event.total_spend }}<br>
-                    <strong>Current Share:</strong> ${{ info.share }}<br>
-                    <strong>Status:</strong> <span class="event-status">{{ info.status }}</span><br>
+{% if info.joined %}
+    <strong>Current Share:</strong> ${{ info.share }}<br>
+{% endif %}
+
 
                     {% if info.joined %}
                         <span class="joined">✅ You have already joined this event.</span>
                         <a href="{% url 'chipin:leave_event' group.id event.id %}" class="btn btn-warning" onclick="return confirm('Are you sure you want to leave this event?');">Leave Event</a>
                     {% else %}
                         {% if info.eligible %}
-                            <span class="eligible">🟢 Eligible to join.</span>
-                            <a href="{% url 'chipin:join_event' group.id event.id %}" class="btn btn-success">Join Event</a>
+                            <a href="{% url 'chipin:join_event' group.id event.id %}" class="btn btn-success">Press only if Split payments</a>
                         {% else %}
                             <span class="waiting-room">🕒 Waiting room — increase your balance or wait for more members.</span>
                         {% endif %}
