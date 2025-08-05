@@ -8,9 +8,9 @@ from .forms import UserRegistrationForm, TopUpForm
 import requests
 from django.conf import settings
 from django.contrib.auth.models import User
-from .models import Transaction
+from .models import Transaction, Profile, UserChangeLog
 from chipin.models import Event, Group
-from .forms import TopUpForm
+from .forms import TopUpForm, UserUpdateForm
 from django import forms
 
 def register(request):
@@ -109,3 +109,51 @@ def transactions_view(request):
 def user_view(request):
     profile = request.user.profile  # Get the logged-in user's profile
     return render(request, 'users/user.html', {'balance': profile.balance})
+
+@login_required
+def user_portal(request):
+    user = request.user
+    profile = user.profile
+
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST, instance=user, profile=profile)
+        if form.is_valid():
+            changes = []
+
+            # Check User fields
+            for field in ['username', 'first_name', 'last_name', 'email']:
+                old = getattr(user, field)
+                new = form.cleaned_data.get(field)
+                if old != new:
+                    changes.append((field, old, new))
+                    setattr(user, field, new)
+
+            # Check Profile field
+            old_nickname = profile.nickname
+            new_nickname = form.cleaned_data.get('nickname')
+            if old_nickname != new_nickname:
+                changes.append(('nickname', old_nickname, new_nickname))
+                profile.nickname = new_nickname
+
+            user.save()
+            profile.save()
+
+            for field, old, new in changes:
+                UserChangeLog.objects.create(
+                    user=user,
+                    field_name=field,
+                    old_value=old,
+                    new_value=new
+                )
+
+            messages.success(request, "Your details were updated successfully.")
+            return redirect('users:user_portal')
+    else:
+        form = UserUpdateForm(instance=user, profile=profile)
+
+    return render(request, 'users/user_portal.html', {
+        'form': form,
+        'balance': profile.balance
+    })
+
+

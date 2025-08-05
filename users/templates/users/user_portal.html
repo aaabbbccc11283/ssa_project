@@ -1,0 +1,27 @@
+{% extends 'chipin/base.html' %}
+{% block title %}User Portal{% endblock %}
+
+{% block content %}
+<div class="dashboard-container content-fade">
+    <h2 class="welcome-text">Manage Your Account</h2>
+
+    <div class="balance-card">
+        <h3>Edit Your Profile</h3>
+        <form method="post" class="styled-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn primary-btn mt-2">Save Changes</button>
+        </form>
+    </div>
+
+    <div class="balance-card mt-6">
+        <h3>Current Balance</h3>
+        <p class="balance-amount" data-balance="{{ balance }}">${{ balance }}</p>
+    </div>
+
+    <div class="button-group mt-4">
+        <a href="{% url 'users:delete' %}" class="btn danger-btn">Delete Account</a>
+        <a href="{% url 'chipin:home' %}" class="btn secondary-btn">Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

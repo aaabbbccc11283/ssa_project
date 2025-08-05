@@ -44,8 +44,8 @@ class Profile(models.Model):
 
 class Transaction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    event = models.CharField(max_length=255)
-    group = models.CharField(max_length=255)
+    event = models.CharField(max_length=255, blank=True, null=True)
+    group = models.CharField(max_length=255, blank=True, null=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -60,3 +60,13 @@ class Transaction(models.Model):
 
     def __str__(self):
         return f"{self.user.username} | {self.formatted_amount()} | {self.created_at}"
+
+class UserChangeLog(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    field_name = models.CharField(max_length=50)
+    old_value = models.TextField(blank=True, null=True)
+    new_value = models.TextField(blank=True, null=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} changed {self.field_name} at {self.timestamp}"

@@ -45,3 +45,16 @@ class TopUpForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['top_up_amount']
+
+class UserUpdateForm(forms.ModelForm):
+    nickname = forms.CharField(max_length=30, required=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email']
+
+    def __init__(self, *args, **kwargs):
+        profile = kwargs.pop('profile', None)
+        super().__init__(*args, **kwargs)
+        if profile:
+            self.fields['nickname'].initial = profile.nickname
