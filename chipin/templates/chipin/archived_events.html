@@ -30,6 +30,10 @@
                     {% endif %}
 
                     <p><strong>Paid to:</strong> {{ event.group.admin.profile.nickname }} (Admin)</p>
+
+                    {% if request.user == group.admin %}
+                        <a href="{% url 'chipin:unarchive_event' group.id event.id %}" class="btn btn-warning" onclick="return confirm('Unarchive this event?');">Unarchive</a>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>

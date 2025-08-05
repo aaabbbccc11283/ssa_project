@@ -28,11 +28,10 @@ urlpatterns = [
    path('group/<int:group_id>/event/<int:event_id>/transfer_funds/', views.transfer_funds, name='transfer_funds'),
    path('accept_event/<int:event_id>/', views.accept_event, name='accept_event'),
    path('group/<int:group_id>/event/<int:event_id>/archive/', views.archive_event, name='archive_event'),
-   path('archived/', views.archived_events, name='archived_events'),
    path('group/<int:group_id>/archived/', views.archived_events, name='archived_events'),
    path("", user_views.user, name="user"),
    path('transactions/', views.transaction_history, name='transaction_history'),
    path('group/<int:group_id>/contact_support/', views.contact_support, name='contact_support'),
    path('contact_support/', views.contact_support_view, name='contact_support'),
-
+   path('group/<int:group_id>/event/<int:event_id>/unarchive/', views.unarchive_event, name='unarchive_event'),
 ]

@@ -18,6 +18,8 @@ from users.models import Transaction
 from django.shortcuts import render
 from django.utils.timezone import now, timedelta
 from django.utils import timezone
+from django.http import HttpResponseForbidden
+
 
 
 @login_required
@@ -589,3 +591,16 @@ def contact_support_view(request):
         'groups': groups,
         'events': events
     })
+
+@login_required
+def unarchive_event(request, group_id, event_id):
+    group = get_object_or_404(Group, pk=group_id)
+    event = get_object_or_404(Event, pk=event_id, group=group)
+
+    if request.user != group.admin:
+        return HttpResponseForbidden("Only the admin can unarchive events.")
+
+    event.archived = False
+    event.save()
+
+    return redirect('chipin:archived_events', group_id=group.id)

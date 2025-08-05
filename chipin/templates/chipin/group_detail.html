@@ -15,43 +15,46 @@
 
     <div class="transaction-list">
         <h2>Transactions</h2>
-        <ul>
-            {% for event, info in event_share_info.items %}
-                <li class="transaction-item">
-                    <strong>{{ event.name }}</strong><br>
-                    Date: {{ event.date }}<br>
-                    <strong>Total Spend:</strong> ${{ event.total_spend }}<br>
-{% if info.joined %}
-    <strong>Current Share:</strong> ${{ info.share }}<br>
-{% endif %}
 
+        {% if event_share_info %}
+            <ul>
+                {% for event, info in event_share_info.items %}
+                    <li class="transaction-item">
+                        <strong>{{ event.name }}</strong><br>
+                        Date: {{ event.date }}<br>
+                        <strong>Total Spend:</strong> ${{ event.total_spend }}<br>
 
-                    {% if info.joined %}
-                        <span class="joined">✅ You have already joined this event.</span>
-                        <a href="{% url 'chipin:leave_event' group.id event.id %}" class="btn btn-warning" onclick="return confirm('Are you sure you want to leave this event?');">Leave Event</a>
-                    {% else %}
-                        {% if info.eligible %}
-                            <a href="{% url 'chipin:join_event' group.id event.id %}" class="btn btn-success">Press only if Split payments</a>
-                        {% else %}
-                            <span class="waiting-room">🕒 Waiting room — increase your balance or wait for more members.</span>
+                        {% if info.joined %}
+                            <strong>Current Share:</strong> ${{ info.share }}<br>
                         {% endif %}
-                    {% endif %}
 
-                    {% if request.user == group.admin %}
-                        <div class="admin-controls">
-                            <a href="{% url 'chipin:delete_event' group.id event.id %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this event?');">Delete</a>
-                            <a href="{% url 'chipin:transfer_funds' group.id event.id %}" class="btn btn-info">Transfer Funds</a>
-
-                            {% if event.status == "Archived" and not event.archived %}
-                                <a href="{% url 'chipin:archive_event' group.id event.id %}" class="btn secondary-btn" onclick="return confirm('Archive this event?');">Archive</a>
-                            {% elif event.archived %}
-                                <span class="badge badge-dark">Archived</span>
+                        {% if info.joined %}
+                            <span class="joined">✅ You have already joined this event.</span>
+                            <a href="{% url 'chipin:leave_event' group.id event.id %}" class="btn btn-warning" onclick="return confirm('Are you sure you want to leave this event?');">Leave Event</a>
+                        {% else %}
+                            {% if info.eligible %}
+                                <a href="{% url 'chipin:join_event' group.id event.id %}" class="btn btn-success">Press only if Split payments</a>
+                            {% else %}
+                                <span class="waiting-room">🕒 Waiting room — increase your balance or wait for more members.</span>
                             {% endif %}
-                        </div>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
+                        {% endif %}
+
+                        {% if request.user == group.admin %}
+                            <div class="admin-controls">
+                                <a href="{% url 'chipin:delete_event' group.id event.id %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this event?');">Delete</a>
+                                <a href="{% url 'chipin:transfer_funds' group.id event.id %}" class="btn btn-info">Transfer Funds</a>
+
+                                {% if not event.archived %}
+                                    <a href="{% url 'chipin:archive_event' group.id event.id %}" class="btn secondary-btn" onclick="return confirm('Archive this event?');">Archive</a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No current transactions.</p>
+        {% endif %}
     </div>
 
     <div class="comments-section">
@@ -91,7 +94,7 @@
         </ul>
     </div>
 
-<a href="{% url 'chipin:contact_support' %}" class="btn secondary-btn">Contact Support</a>
+    <a href="{% url 'chipin:contact_support' %}" class="btn secondary-btn">Contact Support</a>
 
     {% if request.user not in group.members.all %}
         <a href="{% url 'chipin:request_to_join_group' group.id %}" class="btn btn-info">Request to Join</a>
