@@ -12,6 +12,8 @@ from .models import Transaction, Profile, UserChangeLog
 from chipin.models import Event, Group
 from .forms import TopUpForm, UserUpdateForm
 from django import forms
+from .forms import PasswordChangeCustomForm
+from django.contrib.auth import update_session_auth_hash
 
 def register(request):
     if request.method == "POST":
@@ -157,3 +159,27 @@ def user_portal(request):
     })
 
 
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeCustomForm(request.POST)
+        if form.is_valid():
+            new_password = form.cleaned_data['new_password1']
+            request.user.set_password(new_password)
+            request.user.save()
+            update_session_auth_hash(request, request.user)
+
+            # ✅ Log the password change
+            UserChangeLog.objects.create(
+                user=request.user,
+                field_name="password",
+                old_value=None,
+                new_value="Password changed"
+            )
+
+            messages.success(request, "Password changed successfully.")
+            return redirect('users:user_portal')
+    else:
+        form = PasswordChangeCustomForm()
+
+    return render(request, 'users/change_password.html', {'form': form})

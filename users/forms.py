@@ -58,3 +58,25 @@ class UserUpdateForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         if profile:
             self.fields['nickname'].initial = profile.nickname
+
+class PasswordChangeCustomForm(forms.Form):
+    new_password1 = forms.CharField(
+        label="New Password",
+        widget=forms.PasswordInput,
+        strip=False
+    )
+    new_password2 = forms.CharField(
+        label="Confirm New Password",
+        widget=forms.PasswordInput,
+        strip=False
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        pw1 = cleaned_data.get("new_password1")
+        pw2 = cleaned_data.get("new_password2")
+
+        if pw1 and pw2 and pw1 != pw2:
+            raise forms.ValidationError("Passwords do not match.")
+        return cleaned_data
+
