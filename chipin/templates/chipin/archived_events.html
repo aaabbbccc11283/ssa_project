@@ -2,34 +2,39 @@
 {% block title %}Archived Events - {{ group.name }}{% endblock %}
 
 {% block content %}
-<h1>Archived Events - {{ group.name }}</h1>
+<div class="archived-events-container">
+    <h1 class="archived-title">Archived Events – {{ group.name }}</h1>
 
-<a href="{% url 'chipin:group_detail' group.id %}" class="btn btn-primary">← Back to Group</a>
+    <a href="{% url 'chipin:group_detail' group.id %}" class="btn secondary-btn back-btn">← Back to Group</a>
 
-<ul>
-    {% for event in archived_events %}
-<li>
-    <strong>{{ event.name }}</strong><br>
-    Date: {{ event.date }}<br>
-    Total Spend: ${{ event.total_spend }}<br>
-    Status: {{ event.status }}<br>
+    {% if archived_events %}
+        <div class="event-list">
+            {% for event in archived_events %}
+                <div class="event-card">
+                    <h2 class="event-name">{{ event.name }}</h2>
+                    <p><strong>Date:</strong> {{ event.date }}</p>
+                    <p><strong>Total Spend:</strong> ${{ event.total_spend }}</p>
+                    <p><strong>Status:</strong> {{ event.status }}</p>
 
-    {% if event.members.all %}
-        <strong>Paid by:</strong>
-        <ul>
-            {% for member in event.members.all %}
-                <li>{{ member.profile.nickname }} ({{ member.username }})</li>
+                    {% if event.members.all %}
+                        <div class="event-section">
+                            <strong>Paid by:</strong>
+                            <ul class="member-list">
+                                {% for member in event.members.all %}
+                                    <li>{{ member.profile.nickname }} ({{ member.username }})</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% else %}
+                        <p><em>No members joined this event.</em></p>
+                    {% endif %}
+
+                    <p><strong>Paid to:</strong> {{ event.group.admin.profile.nickname }} (Admin)</p>
+                </div>
             {% endfor %}
-        </ul>
+        </div>
     {% else %}
-        <strong>No members joined this event.</strong><br>
+        <p class="no-events">No archived events yet.</p>
     {% endif %}
-
-    <strong>Paid to:</strong> {{ event.group.admin.profile.nickname }} (Admin)<br>
-</li>
-
-    {% empty %}
-        <li>No archived events yet.</li>
-    {% endfor %}
-</ul>
+</div>
 {% endblock %}

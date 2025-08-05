@@ -3,15 +3,15 @@
 {% block title %}User Dashboard{% endblock %}
 
 {% block content %}
-<div class="dashboard-container">
+<div class="dashboard-container content-fade">
     <h2 class="welcome-text">Welcome, {{ request.user.first_name }}</h2>
 
     <div class="balance-card">
         <h3>Current Balance</h3>
-        <p class="balance-amount">${{ balance }}</p>
+        <p class="balance-amount" data-balance="{{ balance }}">${{ balance }}</p>
         <div class="button-group">
             <a href="{% url 'users:top_up' %}" class="btn primary-btn">Top Up</a>
-            <a href="{% url 'chipin:home' %}" class="btn">Through to Transaction Portal</a>
+            <a href="{% url 'chipin:home' %}" class="btn">Transaction Portal</a>
             <a href="{% url 'users:delete' %}" class="btn danger-btn">Delete Account</a>
         </div>
     </div>

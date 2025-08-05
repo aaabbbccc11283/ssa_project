@@ -1,11 +1,11 @@
 /* === SafeSwap Dashboard Redesign: Destiny-Inspired Theme === */
 :root {
-    --purple: #8E24AA;         /* Destiny 1 Legendary Purple */
-    --green: #10B981;          /* Spring Green */
-    --background: #2C2C38;     /* Warm Graphite Grey */
-    --card-bg: #3A3A4B;        /* Soft Charcoal */
-    --text: #F3F4F6;           /* Off-White */
-    --accent: #A78BFA;         /* Dim Lavender */
+    --purple: #8E24AA;
+    --green: #10B981;
+    --background: #2C2C38;
+    --card-bg: #3A3A4B;
+    --text: #F3F4F6;
+    --accent: #A78BFA;
 }
 
 /* General Body Override */
@@ -14,7 +14,140 @@ body {
     color: var(--text);
 }
 
-/* Container */
+/* === Layout Container === */
+.layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--background);
+}
+
+/* Sidebar (fixed left) */
+.sidebar {
+    width: 220px;
+    transform: translateX(0);
+    transition: transform 0.4s ease-in-out;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000;
+    background-color: var(--card-bg);
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.sidebar.collapsed {
+    transform: translateX(-240px);
+}
+
+/* Sidebar toggle button */
+.sidebar-toggle {
+    position: fixed;
+    top: 20px;
+    left: 240px;
+    z-index: 1001;
+    background-color: var(--green);
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sidebar-toggle.collapsed {
+    left: 20px;
+}
+
+/* Logo */
+.logo img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Sidebar links */
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.nav-links a,
+.nav-links button {
+    background: none;
+    border: none;
+    color: var(--green);
+    text-align: left;
+    font-size: 16px;
+    padding: 6px 0;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.nav-links a:hover,
+.nav-links button:hover {
+    color: var(--purple);
+}
+
+.logout-form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Unified Sidebar Buttons */
+.menu-btn {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    text-align: left;
+    background-color: var(--purple);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.menu-btn:hover {
+    background-color: #a155b9;
+}
+
+/* === Main Content Shift === */
+.main-content {
+    padding: 40px;
+    max-width: 1000px;
+    flex: 1;
+    transition: margin-left 0.4s ease-in-out;
+    background-color: var(--background);
+    margin: 0 auto;
+}
+
+/* Shift right when sidebar is open */
+.sidebar:not(.collapsed) ~ .main-content {
+    margin-left: 350px;
+    margin-right: 40px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 50px;
+    color: var(--text);
+}
+
+/* === Dashboard === */
 .dashboard-container {
     max-width: 800px;
     margin: 0 auto;
@@ -23,7 +156,6 @@ body {
     border-radius: 12px;
 }
 
-/* Headings and Text */
 .welcome-text {
     font-size: 28px;
     color: var(--green);
@@ -36,7 +168,6 @@ body {
     margin-bottom: 25px;
 }
 
-/* Balance Card */
 .balance-card {
     background-color: var(--card-bg);
     padding: 24px;
@@ -56,13 +187,13 @@ body {
     color: var(--green);
 }
 
-/* Buttons */
 .button-group {
     margin-top: 18px;
     display: flex;
     gap: 10px;
 }
 
+/* Buttons */
 .btn {
     padding: 10px 18px;
     text-decoration: none;
@@ -98,9 +229,7 @@ body {
     margin-top: 20px;
 }
 
-
-
-/* === SafeSwap: Top Up Page Styles === */
+/* === Top Up Page === */
 .top-up-container {
     max-width: 600px;
     margin: 0 auto;
@@ -127,7 +256,6 @@ body {
     color: var(--green);
 }
 
-/* Form Styling Override (uses existing form input styling) */
 .topup-form input[type="text"],
 .topup-form input[type="number"],
 .topup-form input[type="email"],
@@ -147,8 +275,7 @@ body {
     box-shadow: 0 0 0 2px var(--green);
 }
 
-
-/* === SafeSwap: Transaction History Styles === */
+/* === Transaction History Page === */
 .transaction-container {
     max-width: 1000px;
     margin: 0 auto;
@@ -163,7 +290,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* Scrollable wrapper if too long */
 .transaction-table-wrapper {
     max-height: 500px;
     overflow-y: auto;
@@ -171,7 +297,6 @@ body {
     border-radius: 8px;
 }
 
-/* Styled Table */
 .transaction-table {
     width: 100%;
     border-collapse: collapse;
@@ -210,3 +335,500 @@ body {
     text-align: center;
 }
 
+/* === Archived Events Page === */
+.archived-events-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: var(--background);
+}
+
+.archived-title {
+    color: var(--green);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.back-btn {
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+.event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.event-card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    color: var(--text);
+}
+
+.event-name {
+    color: var(--purple);
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.event-section {
+    margin-top: 10px;
+}
+
+.member-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-top: 5px;
+}
+
+.no-events {
+    text-align: center;
+    font-style: italic;
+    color: var(--accent);
+    margin-top: 40px;
+}
+
+/* === Smooth Fade/Slide for Page Content === */
+.content-fade {
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+/* === Create Event Page === */
+.create-event-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-title {
+    color: var(--green);
+    margin-bottom: 25px;
+}
+
+.create-event-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+    color: var(--text);
+}
+
+.form-group input {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4b4b5f;
+    color: var(--text);
+    width: 100%;
+}
+
+.form-group input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--green);
+}
+
+.back-link {
+    margin-top: 30px;
+    text-align: center;
+}
+
+
+/* === Global Top-Right Back Button === */
+.back-button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.back-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: var(--accent);
+    color: white;
+}
+
+/* === Create Group Page === */
+.create-group-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-title {
+    color: var(--green);
+    margin-bottom: 10px;
+}
+
+.form-subtext {
+    color: var(--accent);
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.create-group-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.create-group-form input,
+.create-group-form select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: #4b4b5f;
+    color: var(--text);
+}
+
+.create-group-form input:focus,
+.create-group-form select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--green);
+}
+
+.back-link {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.form-note {
+    font-size: 13px;
+    color: var(--accent);
+    background-color: #3f3f51;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+/* === Group Detail Page === */
+.group-detail-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.transaction-list ul,
+.member-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.transaction-item {
+    background-color: #4b4b5f;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.admin-controls {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.comment {
+    padding: 10px 16px;
+    margin-bottom: 10px;
+    background-color: #3f3f51;
+    border-radius: 8px;
+}
+
+.comment-form {
+    margin-top: 20px;
+}
+
+.invite-section {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.member-section {
+    margin-top: 30px;
+}
+
+.joined,
+.eligible,
+.waiting-room {
+    display: block;
+    margin-top: 6px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--accent);
+}
+
+/* === Home (Portal) Page === */
+.home-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.section-block {
+    margin-bottom: 40px;
+}
+
+.invitation-list,
+.transaction-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.invitation-list li,
+.transaction-list li {
+    margin-bottom: 16px;
+    background-color: #4b4b5f;
+    padding: 16px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.group-name {
+    font-weight: 600;
+    color: var(--green);
+    text-decoration: none;
+}
+
+.group-name:hover {
+    text-decoration: underline;
+}
+
+.create-new-group {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* === Invite Users Page === */
+.invite-users-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.invite-users-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.invite-users-form label {
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+    display: block;
+}
+
+.invite-users-form select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: #4b4b5f;
+    color: var(--text);
+}
+
+.invite-users-form select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--green);
+}
+
+/* === Delete Account Page === */
+.delete-account-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.delete-warning {
+    color: #f87171;
+    background-color: #3f3f51;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+.delete-account-form button {
+    font-size: 16px;
+    padding: 12px 24px;
+}
+
+/* === Login Page === */
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4b4b5f;
+    color: var(--text);
+}
+
+.login-form input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--green);
+}
+
+.divider {
+    margin: 20px 0;
+    color: var(--accent);
+    font-size: 14px;
+}
+
+/* === Register Page === */
+.register-container {
+    max-width: 600px; /* was 500px */
+    margin: 40px auto; /* add vertical space */
+    background-color: var(--card-bg);
+    padding: 50px; /* was 40px */
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px; /* was 20px */
+    margin-top: 30px; /* more space above */
+}
+
+
+/* Form styling from Django */
+.register-form input,
+.register-form select {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4b4b5f;
+    color: var(--text);
+}
+
+.register-form input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--green);
+}
+
+.form-subtext {
+    color: var(--accent);
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.link-inline {
+    color: var(--green);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.link-inline:hover {
+    text-decoration: underline;
+}
+
+
+.top-up-container {
+    max-width: 600px;
+    margin: 60px auto;
+    background-color: var(--card-bg);
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.topup-header {
+    color: var(--green);
+    font-size: 26px;
+    margin-bottom: 16px;
+}
+
+.topup-subtext {
+    color: var(--accent);
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+.topup-balance {
+    font-weight: bold;
+    color: var(--green);
+}
+
+.topup-form input[type="text"],
+.topup-form input[type="number"],
+.topup-form input[type="email"],
+.topup-form select {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    margin-bottom: 24px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4b4b5f;
+    color: var(--text);
+}
+
+.topup-form input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--green);
+}

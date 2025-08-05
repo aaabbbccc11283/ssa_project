@@ -23,12 +23,18 @@
                 <tr>
                     <td>{{ txn.event }}</td>
                     <td>{{ txn.group }}</td>
-                    <td>${{ txn.amount }}</td>
+                    <td>
+                        {% if txn.amount > 0 %}
+                            <span style="color: green;">+${{ txn.amount }}</span>
+                        {% else %}
+                            <span style="color: red;">${{ txn.amount }}</span>
+                        {% endif %}
+                    </td>
                     <td>{{ txn.created_at|date:"M d, Y H:i" }}</td>
                     <td>{{ txn.user.profile.nickname }} ({{ txn.user.username }})</td>
                     <td>
                         {% for ev in events %}
-                            {% if ev.name == txn.event and ev.group.name == txn.group %}
+                            {% if ev.name|lower == txn.event|lower and ev.group.name|lower == txn.group|lower %}
                                 {{ ev.group.admin.profile.nickname }} ({{ ev.group.admin.username }})
                             {% endif %}
                         {% endfor %}

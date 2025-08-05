@@ -3,41 +3,68 @@
 <html lang="en">
 <head>
     <title>{% block title %}ChipIn{% endblock %}</title>
-<link rel="stylesheet" href="{% static 'chipin/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'chipin/styles.css' %}">
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="{% static 'chipin/logo_90.jpg' %}" alt="ChipIn Logo">
-        </div>
-        <div class="user-info">
+    <!-- Sidebar Toggle Button -->
+    <button id="sidebarToggle" class="sidebar-toggle collapsed">&#9776;</button>
+
+    <div class="layout">
+        <aside class="sidebar collapsed" id="sidebar">
+            <div class="logo">
+                <img src="{% static 'chipin/logo_90.jpg' %}" alt="ChipIn Logo">
+            </div>
+
             {% if request.user.is_authenticated %}
-                <span>{{ request.user.profile.nickname }}</span> 
-                <a href="{% url 'chipin:home' %}">Portal Home</a> <a href="{% url 'users:user' %}">Home</a>  <form action="{% url 'users:logout' %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit">Logout</button>
-                </form>
+                <nav class="nav-links">
+                    <a href="{% url 'chipin:home' %}" class="menu-btn">Portal Home</a>
+                    <a href="{% url 'users:user' %}" class="menu-btn">User Dashboard</a>
+                    <a href="{% url 'users:top_up' %}" class="menu-btn">Top Up</a>
+                    <form action="{% url 'users:logout' %}" method="post" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit" class="menu-btn">Logout</button>
+                    </form>
+                </nav>
             {% else %}
-                <a href="{% url 'users:login' %}">Login</a> <a href="{% url 'users:register' %}">Register</a>
+                <nav class="nav-links">
+                    <a href="{% url 'users:login' %}" class="menu-btn">Login</a>
+                    <a href="{% url 'users:register' %}" class="menu-btn">Register</a>
+                </nav>
             {% endif %}
+        </aside>
+
+        <div class="main-content">
+            <!-- Back Button -->
+            <div class="back-button-wrapper">
+                <a href="javascript:history.back()" class="btn secondary-btn back-button">← Back</a>
+            </div>
+
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+            <main class="content-fade">
+                {% block content %}{% endblock %}
+            </main>
+
+            <footer>
+                <p>&copy; 2025 SafeSwap. All rights reserved.</p>
+            </footer>
         </div>
-    </header>
+    </div>
 
-    <!-- Messages block -->
-    {% if messages %}
-        <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
+    <script>
+        const toggle = document.getElementById("sidebarToggle");
+        const sidebar = document.getElementById("sidebar");
 
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
-    <footer>
-        <p>&copy; 2025 SafeSwap. All rights reserved.</p>
-    </footer>
+        toggle.addEventListener("click", () => {
+            sidebar.classList.toggle("collapsed");
+            toggle.classList.toggle("collapsed");
+        });
+    </script>
 </body>
 </html>

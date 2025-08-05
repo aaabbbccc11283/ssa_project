@@ -2,18 +2,21 @@
 {% load static %}
 {% load socialaccount %}
 
-{% block title %}Login - ChipIn{% endblock %}
+{% block title %}Login - SafeSwap{% endblock %}
 
 {% block content %}
-    <div class="login-container">
-        <form action="{% url 'users:login' %}" method="post">
-            {% csrf_token %}
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="submit" value="Login">
-        </form>
-    </div>
+<div class="login-container content-fade">
+    <h1 class="form-title">Login</h1>
 
-    <h3>Or sign in with:</h3>
-    <a href="{% provider_login_url 'github' %}">Sign in with GitHub</a>
+    <form action="{% url 'users:login' %}" method="post" class="login-form">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit" class="btn primary-btn">Log In</button>
+    </form>
+
+    <div class="divider">or</div>
+
+    <a href="{% provider_login_url 'github' %}" class="btn secondary-btn">Sign in with GitHub</a>
+</div>
 {% endblock %}

@@ -1,11 +1,15 @@
 {% extends 'chipin/base.html' %}
 {% load static %}
-{% block title %}Delete Account Confirmation - ChipIn{% endblock %}
+{% block title %}Delete Account - SafeSwap{% endblock %}
+
 {% block content %}
-<h1>Delete Account</h1>
-<p>Are you sure you want to delete your account? This action cannot be undone.</p>
-<form method="POST">
-    {% csrf_token %}
-    <button type="submit">Delete My Account</button>
-</form>
+<div class="delete-account-container content-fade">
+    <h1 class="form-title">Delete Account</h1>
+    <p class="delete-warning">⚠️ This action is permanent and cannot be undone. All your data will be lost.</p>
+
+    <form method="POST" class="delete-account-form">
+        {% csrf_token %}
+        <button type="submit" class="btn danger-btn">Delete My Account</button>
+    </form>
+</div>
 {% endblock %}

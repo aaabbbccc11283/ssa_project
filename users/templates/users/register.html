@@ -1,12 +1,20 @@
 {% extends 'chipin/base.html' %}
 {% load static %}
-{% block title %}Register - ChipIn{% endblock %}
+{% block title %}Register - SafeSwap{% endblock %}
+
 {% block content %}
-    <h1>Register for ChipIn</h1>
-    <form method="post">
+<div class="register-container content-fade">
+    <h1 class="form-title">Create a New Account</h1>
+
+    <form method="post" class="register-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Register</button>
+        <button type="submit" class="btn primary-btn">Register</button>
     </form>
-    <p>Already have an account? <a href="{% url 'users:login' %}">Login</a></p>
+
+    <p class="form-subtext">
+        Already have an account?
+        <a href="{% url 'users:login' %}" class="link-inline">Login here</a>
+    </p>
+</div>
 {% endblock %}

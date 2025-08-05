@@ -3,12 +3,19 @@
 {% block title %}Create a New Transfer Portal{% endblock %}
 
 {% block content %}
-    <h1>Create a New Transfer Portal</h1>
-    <p>Please fill this feild with the 2 parties of the transfer</p>
-    <form method="post">
+<div class="create-group-container content-fade">
+    <h1 class="form-title">Create a New Transfer Portal</h1>
+    <p class="form-note">Include the all parties Involed</p>
+
+
+    <form method="post" class="create-group-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Create Transfer Portal</button>
+        <button type="submit" class="btn primary-btn">Create Transfer Portal</button>
     </form>
-    <a href="{% url 'chipin:home' %}">Back to Homepage</a>
+
+    <div class="back-link">
+        <a href="{% url 'chipin:home' %}" class="btn secondary-btn">← Back to Homepage</a>
+    </div>
+</div>
 {% endblock %}

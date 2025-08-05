@@ -473,7 +473,7 @@ def archived_events(request, group_id):
 def transaction_history(request):
     from users.models import Transaction
     transactions = Transaction.objects.filter(user=request.user).order_by('-created_at')
-    events = Event.objects.all()  # Needed to look up payee info
+    events = Event.objects.select_related('group', 'group__admin')  # preload for performance
     return render(request, 'chipin/transaction_history.html', {
         'transactions': transactions,
         'events': events

@@ -1,41 +1,50 @@
 {% extends 'chipin/base.html' %}
 {% load static %}
 {% block title %}Payment Portal{% endblock %}
+
 {% block content %}
-    <h1>Payment Portal</h1>
-    <h2>Transaction Invitations</h2>
-    <div class="invitation-notification">
-        {% if pending_invitations %}
-            <ul>
-                {% for group in pending_invitations %}
+<div class="home-container content-fade">
+    <h1 class="form-title">Payment Portal</h1>
+
+    <section class="section-block">
+        <h2>Transaction Invitations</h2>
+        <div class="invitation-notification">
+            {% if pending_invitations %}
+                <ul class="invitation-list">
+                    {% for group in pending_invitations %}
+                        <li>
+                            You’ve been invited to join <strong>{{ group.name }}</strong>.
+                            <a href="{% url 'chipin:accept_invite' group.id %}?user_id={{ request.user.id }}" class="btn btn-success">Accept</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No pending invitations.</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="section-block">
+        <h2>Your Transactions</h2>
+        {% if user.group_memberships.all %}
+            <ul class="transaction-list">
+                {% for group in user.group_memberships.all %}
                     <li>
-                        You have been invited to join <strong>{{ group.name }}</strong>.
-                        <a href="{% url 'chipin:accept_invite' group.id %}?user_id={{ request.user.id }}">Accept</a>
+                        <a href="{% url 'chipin:group_detail' group.id %}" class="group-name">{{ group.name }}</a>
+                        {% if group.admin == request.user %}
+                            <a href="{% url 'chipin:delete_group' group.id %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this group?');">Delete</a>
+                        {% else %}
+                            <a href="{% url 'chipin:leave_group' group.id %}" class="btn btn-warning" onclick="return confirm('Are you sure you want to leave this group?');">Leave</a>
+                        {% endif %}
                     </li>
-                {% empty %}
-                    <li>No pending invitations.</li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p>No pending invitations.</p>
+            <p>You are not a member of any transactions yet.</p>
         {% endif %}
-    </div>
-
-    <h2>Your Transactions</h2>
-    <ul>
-        {% for group in user.group_memberships.all %}
-        <li>
-            <a href="{% url 'chipin:group_detail' group.id %}">{{ group.name }}</a>
-            {% if group.admin == request.user %}
-                <a href="{% url 'chipin:delete_group' group.id %}" onclick="return confirm('Are you sure you want to delete this group?');">Delete</a>
-            {% else %}
-                <a href="{% url 'chipin:leave_group' group.id %}" onclick="return confirm('Are you sure you want to leave this group?');">Leave</a>
-            {% endif %}
-        </li>
-        {% empty %}
-        <li>You are not a member of any transactions yet.</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'chipin:create_group' %}">Create a New transaction</a>
-
+        <div class="create-new-group">
+            <a href="{% url 'chipin:create_group' %}" class="btn primary-btn">Create a New Transaction</a>
+        </div>
+    </section>
+</div>
 {% endblock %}
