@@ -48,6 +48,10 @@ class TopUpForm(forms.ModelForm):
 
 class UserUpdateForm(forms.ModelForm):
     nickname = forms.CharField(max_length=30, required=True)
+    abn = forms.CharField(max_length=20, required=False)
+    tfn = forms.CharField(max_length=20, required=False)
+    billing_address = forms.CharField(widget=forms.Textarea, required=False)
+
 
     class Meta:
         model = User

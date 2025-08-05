@@ -122,7 +122,7 @@ def user_portal(request):
         if form.is_valid():
             changes = []
 
-            # Check User fields
+            # Track and apply changes to User model fields
             for field in ['username', 'first_name', 'last_name', 'email']:
                 old = getattr(user, field)
                 new = form.cleaned_data.get(field)
@@ -130,16 +130,23 @@ def user_portal(request):
                     changes.append((field, old, new))
                     setattr(user, field, new)
 
-            # Check Profile field
+            # Track nickname changes from Profile
             old_nickname = profile.nickname
             new_nickname = form.cleaned_data.get('nickname')
             if old_nickname != new_nickname:
                 changes.append(('nickname', old_nickname, new_nickname))
                 profile.nickname = new_nickname
 
+            # ✅ Save optional fields (not tracked in change log)
+            profile.abn = form.cleaned_data.get('abn', '')
+            profile.tfn = form.cleaned_data.get('tfn', '')
+            profile.billing_address = form.cleaned_data.get('billing_address', '')
+
+            # Save updates
             user.save()
             profile.save()
 
+            # Log changes
             for field, old, new in changes:
                 UserChangeLog.objects.create(
                     user=user,
@@ -157,6 +164,7 @@ def user_portal(request):
         'form': form,
         'balance': profile.balance
     })
+
 
 
 @login_required

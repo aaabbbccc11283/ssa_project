@@ -31,6 +31,10 @@ class Profile(models.Model):
     nickname = models.CharField(max_length=30, unique=True)
     max_spend = models.DecimalField(max_digits=10, decimal_places=2, default=100.00)
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=100.00)
+    abn = models.CharField(max_length=20, blank=True, null=True)
+    tfn = models.CharField(max_length=20, blank=True, null=True)
+    billing_address = models.TextField(blank=True, null=True)
+
 
     def clean(self):
         validate_unique_nickname(self.nickname, instance=self)

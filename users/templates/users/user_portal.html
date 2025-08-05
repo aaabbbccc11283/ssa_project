@@ -7,10 +7,51 @@
 
     <div class="balance-card">
         <h3>Edit Your Profile</h3>
+
         <form method="post" class="styled-form">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn primary-btn mt-2">Save Changes</button>
+
+            <div class="form-group">
+                <label for="id_username">Username</label>
+                {{ form.username }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_first_name">First Name</label>
+                {{ form.first_name }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_last_name">Last Name</label>
+                {{ form.last_name }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_email">Email</label>
+                {{ form.email }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_nickname">Nickname</label>
+                {{ form.nickname }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_abn">ABN</label>
+                {{ form.abn }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_tfn">TFN</label>
+                {{ form.tfn }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_billing_address">Billing Address</label>
+                {{ form.billing_address }}
+            </div>
+
+            <button type="submit" class="btn primary-btn mt-4">Save Changes</button>
         </form>
     </div>
 
@@ -20,9 +61,9 @@
     </div>
 
     <div class="button-group mt-4">
-        <a href="{% url 'users:change_password' %}" class="btn secondary-btn mt-4">Change Password</a>
+        <a href="{% url 'users:change_password' %}" class="btn secondary-btn">Change Password</a>
         <a href="{% url 'users:delete' %}" class="btn danger-btn">Delete Account</a>
-        <a href="{% url 'chipin:home' %}" class="btn secondary-btn">Back to Dashboard</a>
+        <a href="{% url 'chipin:home' %}" class="btn">Back to Dashboard</a>
     </div>
 </div>
 {% endblock %}
