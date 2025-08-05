@@ -32,4 +32,7 @@ urlpatterns = [
    path('group/<int:group_id>/archived/', views.archived_events, name='archived_events'),
    path("", user_views.user, name="user"),
    path('transactions/', views.transaction_history, name='transaction_history'),
+   path('group/<int:group_id>/contact_support/', views.contact_support, name='contact_support'),
+   path('contact_support/', views.contact_support_view, name='contact_support'),
+
 ]

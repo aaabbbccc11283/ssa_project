@@ -17,9 +17,10 @@
 
             {% if request.user.is_authenticated %}
                 <nav class="nav-links">
-                    <a href="{% url 'chipin:home' %}" class="menu-btn">Portal Home</a>
-                    <a href="{% url 'users:user' %}" class="menu-btn">User Dashboard</a>
+                    <a href="{% url 'users:user' %}" class="menu-btn">Homepage</a>
+                    <a href="{% url 'chipin:home' %}" class="menu-btn">Portal</a>
                     <a href="{% url 'users:top_up' %}" class="menu-btn">Top Up</a>
+                    <li><a href="{% url 'chipin:contact_support' %}">Contact Support</a></li>
                     <form action="{% url 'users:logout' %}" method="post" class="logout-form">
                         {% csrf_token %}
                         <button type="submit" class="menu-btn">Logout</button>

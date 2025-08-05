@@ -90,6 +90,8 @@
         </ul>
     </div>
 
+<a href="{% url 'chipin:contact_support' %}" class="btn secondary-btn">Contact Support</a>
+
     {% if request.user not in group.members.all %}
         <a href="{% url 'chipin:request_to_join_group' group.id %}" class="btn btn-info">Request to Join</a>
     {% endif %}

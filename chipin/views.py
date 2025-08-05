@@ -16,6 +16,9 @@ from decimal import Decimal
 from .models import Event
 from users.models import Transaction
 from django.shortcuts import render
+from django.utils.timezone import now, timedelta
+from django.utils import timezone
+
 
 @login_required
 def accept_event(request, event_id):
@@ -476,5 +479,113 @@ def transaction_history(request):
     events = Event.objects.select_related('group', 'group__admin')  # preload for performance
     return render(request, 'chipin/transaction_history.html', {
         'transactions': transactions,
+        'events': events
+    })
+
+from django.utils.timezone import now
+
+@login_required
+def contact_support(request, group_id):
+    group = get_object_or_404(Group, id=group_id)
+    if request.method == 'POST':
+        amount = request.POST.get('amount', 'N/A')
+        timestamp = now().strftime('%Y-%m-%d %H:%M:%S')
+
+        users = group.members.all()
+        user_list = "\n".join([f"{u.username} ({u.email})" for u in users])
+
+        subject = f"[Support Request] from Group '{group.name}'"
+        message = (
+            f"A support request has been submitted.\n\n"
+            f"Group Name: {group.name}\n"
+            f"Group ID: {group.id}\n"
+            f"Users in Group:\n{user_list}\n\n"
+            f"Requested Amount: ${amount}\n"
+            f"Time of Request: {timestamp}\n"
+        )
+
+        send_mail(
+            subject,
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            ['support@eforge.online'],  # 📬 Change this to your actual support email
+            fail_silently=False,
+        )
+
+        messages.success(request, "Support request sent successfully.")
+        return redirect('chipin:group_detail', group_id=group_id)
+
+@login_required
+def contact_support_view(request):
+    user = request.user
+    recent_cutoff = now().date() - timedelta(days=30)
+
+    groups = user.group_memberships.all()
+
+    # Show all events from user's groups in the last 30 days (including archived)
+    recent_events = Event.objects.filter(
+        group__in=groups,
+        date__gte=recent_cutoff
+    ).order_by('-date')
+
+    events = []
+    for e in recent_events:
+        events.append({
+            'id': e.id,
+            'name': e.name,
+            'amount': e.total_spend,
+            'date': e.date,
+            'archived': e.archived,
+            'group_name': e.group.name
+        })
+
+    if request.method == 'POST':
+        is_transaction = request.POST.get("is_transaction") == "yes"
+        is_old = request.POST.get("is_old") == "yes" if is_transaction else False
+        group_name = None
+        event_name = None
+        txn_date = None
+
+        if is_transaction and not is_old:
+            event_id = request.POST.get("event_id")
+            try:
+                event = Event.objects.get(id=event_id)
+                group_name = event.group.name
+                event_name = event.name
+                txn_date = event.date.strftime('%Y-%m-%d')
+            except Event.DoesNotExist:
+                pass
+
+        message = request.POST.get("message", "")
+        timestamp = now().strftime('%Y-%m-%d %H:%M:%S')
+
+        email_body = (
+            f"User: {user.username} ({user.email})\n"
+            f"Time of Request: {timestamp}\n"
+            f"Related to Transaction: {is_transaction}\n"
+        )
+
+        if is_transaction:
+            email_body += f"Transaction older than 30 days: {is_old}\n"
+            if not is_old:
+                email_body += f"Group: {group_name}\nEvent: {event_name}\nTransaction Date: {txn_date}\n"
+            else:
+                email_body += "User was asked to provide last 4 digits, expiry, and date in message.\n"
+
+        email_body += f"\nUser Message:\n{message}"
+
+        send_mail(
+            subject="Support Request from SafeSwap",
+            message=email_body,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=["harrisonschool666@gmail.com"],
+            fail_silently=False
+        )
+
+        messages.success(request, "Your support request has been sent.")
+        return redirect('chipin:home')
+
+    return render(request, 'chipin/contact_support.html', {
+        'groups': groups,
         'events': events
     })

@@ -8,18 +8,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
-EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-ANYMAIL = {
-    "MAILGUN_API_KEY": "cf32132f60de101f8398c30f83d67c54-2b755df8-95dbb201", # Example API Key
-    "MAILGUN_SENDER_DOMAIN": "eforge.online", # Example Sender Domain
-}
-
-DEFAULT_FROM_EMAIL = "orders@eforge.online" # Example Default Email
-EMAIL_HOST = "smtp.mailgun.org"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "postmaster@eforge.online" # Example Host User
-EMAIL_HOST_PASSWORD = "c9f995113e9470cab2b62d6dfbf40ea1-2b755df8-9a06147e"  # Example SMTP password
+
+EMAIL_HOST_USER = 'harrisonschool666@gmail.com'  # 👈 use your actual Gmail
+EMAIL_HOST_PASSWORD = 'gcbk nors dgbf bgte'  # 👈 paste App Password (no spaces)
+DEFAULT_FROM_EMAIL = 'harrisonschool666@gmail.com'
 
 INSTALLED_APPS = [
     'anymail',

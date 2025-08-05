@@ -1,0 +1,67 @@
+{% extends 'chipin/base.html' %}
+{% block title %}Contact Support{% endblock %}
+
+{% block content %}
+<div class="form-container content-fade">
+    <h1 class="form-title">Contact Support</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label><strong>Is your request about a transaction?</strong></label><br>
+        <input type="radio" name="is_transaction" value="yes" required> Yes<br>
+        <input type="radio" name="is_transaction" value="no"> No<br><br>
+
+        <div id="transaction-details" style="display:none;">
+            <label><strong>Is your transaction more than 30 days old?</strong></label><br>
+            <input type="radio" name="is_old" value="yes"> Yes<br>
+            <input type="radio" name="is_old" value="no"> No<br><br>
+
+            <div id="old-transaction-details" style="display:none;">
+                <p>Please provide the following in the message box below:</p>
+                <ul>
+                    <li>Last 4 digits of your credit card</li>
+                    <li>Expiry date (MM/YYYY)</li>
+                    <li>Date of the transaction</li>
+                </ul>
+            </div>
+
+            <div id="recent-transaction-details" style="display:none;">
+                <label for="event">Select Event (last 30 days):</label><br>
+                <select name="event_id" id="event" required>
+                    <option value="">-- Select an event --</option>
+                    {% for e in events %}
+                        <option value="{{ e.id }}">
+                            {{ e.name }} - ${{ e.amount }} ({{ e.date|date:"M d, Y" }}){% if e.archived %} (Archived){% endif %} — {{ e.group_name }}
+                        </option>
+                    {% endfor %}
+                </select><br><br>
+            </div>
+        </div>
+
+        <label for="message"><strong>Message:</strong></label><br>
+        <textarea name="message" rows="5" cols="50" required></textarea><br><br>
+
+        <button type="submit" class="btn primary-btn">Send Support Request</button>
+    </form>
+</div>
+
+<script>
+    const isTransactionRadios = document.getElementsByName("is_transaction");
+    const isOldRadios = document.getElementsByName("is_old");
+
+    function updateTransactionSection() {
+        const isTransaction = [...isTransactionRadios].find(r => r.checked)?.value;
+        document.getElementById("transaction-details").style.display = (isTransaction === "yes") ? "block" : "none";
+    }
+
+    function updateOldTransactionSection() {
+        const isOld = [...isOldRadios].find(r => r.checked)?.value;
+        document.getElementById("old-transaction-details").style.display = (isOld === "yes") ? "block" : "none";
+        document.getElementById("recent-transaction-details").style.display = (isOld === "no") ? "block" : "none";
+    }
+
+    isTransactionRadios.forEach(r => r.addEventListener("change", updateTransactionSection));
+    isOldRadios.forEach(r => r.addEventListener("change", updateOldTransactionSection));
+</script>
+{% endblock %}
